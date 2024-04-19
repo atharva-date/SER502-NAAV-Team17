@@ -15,12 +15,12 @@ id(identifier(X)) --> [X],
 value(number(X)) --> [X], { number(X) }.
 value(identifier(X)) --> id(identifier(X)).
 value(string(X)) --> [X], { string(X) }.
-value(boolean(true)) --> [true].
-value(boolean(false)) --> [false].
+value(boolean('T')) --> [T], { member(T, ['T']) }.
+value(boolean('F')) --> [F], { member(F, ['F']) }.
 
 assign_op(assign('=')) --> [=].
 
 
-%program(P, [bool, y, =, true, ;], [])
-%program(P, [string, y, =, "Strong candidates", ;], [])
-%program(P, [num, y, =, 5, ;], [])
+%program(P, [bool, y, =, 'T', ;], []).
+%program(P, [string, y, =, "Strong candidates", ;], []).
+%program(P, [num, y, =, 5, ;], []).
