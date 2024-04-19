@@ -1,42 +1,42 @@
-## Contributions of Team Members
+Contributions of Team Members
 
-### Atharva Date (adate1@asu.edu):
-**Milestone 1**
+Atharva Date (adate1@asu.edu):
+Milestone 1
 - Create and share the GitHub repository.
 - Research information about the interpreter and build an approach for the project.
 - Help in creating grammar rules for the new language.
 
-**Milestone 2**
+Milestone 2
 - Work on the parsing phase of the interpreter 
 - Focus on the semantics analysis.
 - Contribute towards documentation.
 
-### Vidya Rupak (vrupak@asu.edu):
-**Milestone 1**
+Vidya Rupak (vrupak@asu.edu):
+Milestone 1
 - Create a design of the programming language "NAAV".
 - Assist in the 'grammar' part of the language.
 
-**Milestone 2**
+Milestone 2
 - Come up with data (code snippets for the language).
 - Work on the execution phase of the interpreter.
 - Direct the YouTube video for the final submission.
 
-### Nisha Verma (nverma20@asu.edu):
-**Milestone 1**
+Nisha Verma (nverma20@asu.edu):
+Milestone 1
 - Create grammar rules for the programming language "NAAV".
 - Help to build an approach for the interpreter of the language.
 
-**Milestone 2**
+Milestone 2
 - Focus on the parsing phase.
 - Contribute towards documentation.
 - Work on the presentation file.
 
-### Ansh Sharma (ashar479@asu.edu):
-**Milestone 1**
+Ansh Sharma (ashar479@asu.edu):
+Milestone 1
 - Come up with a parsing technique for the new language.
 - Assist in the 'grammar' part of the language.
 
-**Milestone 2**
+Milestone 2
 - Work on the tokenization phase.
 - Focus on the semantics analysis.
 - Help with the presentation file. 
