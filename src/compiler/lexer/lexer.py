@@ -44,8 +44,13 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-# A string containing ignored characters (spaces and tabs)
+# A string containing ignored characters (spaces, tabs, and comments)
 t_ignore = ' \t'
+
+# Define a rule to ignore comments starting with #
+def t_comment(t):
+    r'\#.*'
+    pass
 
 # Define a rule to handle errors
 def t_error(t):
@@ -67,20 +72,19 @@ def t_NUMERIC(t):
 # Define a rule for string literals
 def t_STRING(t):
     r'"([^\\"]|\\.)*"'
-    t.value = f"'{t.value}'"  # Enclose in single quotes
+    t.value = f"'{t.value}'"
     return t
 
 # Define a rule for identifiers
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.value = f"'{t.value}'"  # Enclose in single quotes
+    t.value = f"'{t.value}'"
     return t
 
 # Build the lexer
 lexer = lex.lex()
 
 if __name__ == "__main__":
-    # Check if a filename is provided as an argument
     if len(sys.argv) != 2:
         print("Usage: python lexer.py <filename>")
         sys.exit(1)
@@ -100,7 +104,7 @@ if __name__ == "__main__":
         while True:
             tok = lexer.token()
             if not tok:
-                break  # No more input
+                break
             token_list.append(str(tok.value) if isinstance(tok.value, str) else tok.value)
 
         # Print tokens in one line
