@@ -45,7 +45,7 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 # A string containing ignored characters (spaces, tabs, and comments)
-t_ignore = ' \t'
+t_ignore = " \t"
 
 # Define a rule to ignore comments starting with #
 def t_comment(t):
@@ -60,7 +60,7 @@ def t_error(t):
 # Define a rule for boolean literals
 def t_BOOLEAN(t):
     r'T|F'
-    t.value = f"'{t.value}'"
+    t.value = f"{t.value}"
     return t
 
 # Define a rule for numeric literals
@@ -72,13 +72,13 @@ def t_NUMERIC(t):
 # Define a rule for string literals
 def t_STRING(t):
     r'"([^\\"]|\\.)*"'
-    t.value = f"'{t.value}'"
+    t.value = f"{t.value}"
     return t
 
 # Define a rule for identifiers
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.value = f"'{t.value}'"
+    t.value = f"{t.value}"
     return t
 
 # Build the lexer
@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
     try:
         # Read the contents of the file
-        with open(filename, 'r') as f:
+        with open(filename, "r") as f:
             data = f.read()
 
         # Give the lexer the file content as input
