@@ -1,3 +1,6 @@
+% author; purpose; version; date
+% Atharva Date; Parser for type declaration; 1.0; 04/19/2024
+
 :- use_rendering(svgtree).
 
 program(Parse) --> declaration(Parse), [;].

@@ -1,6 +1,9 @@
-:- use_rendering(svgtree).
+% author; purpose; version; date
+% Atharva Date; Parser for block, declarations, commands and
+% arithmetic expressions; 1.0; 04/20/2024
 
-% Expressions code
+
+:- use_rendering(svgtree).
 
 program(Parse) --> block(Parse).
 

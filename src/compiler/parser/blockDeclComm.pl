@@ -1,3 +1,8 @@
+% author; purpose; version; date
+% Atharva Date; Parser for type block, declarations, commands like
+% assignment and conditional constructs; 1.0; 04/20/2024
+
+
 :- use_rendering(svgtree).
 
 % Code with block, declarations, condition,

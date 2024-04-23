@@ -1,3 +1,7 @@
+% author; purpose; version; date
+% Atharva Date; Parser for block, declarations, commands and
+% arithmetic expressions with precedence; 1.0; 04/20/2024
+
 :- use_rendering(svgtree).
 
 % Expressions code
