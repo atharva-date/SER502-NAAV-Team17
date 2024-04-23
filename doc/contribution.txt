@@ -7,7 +7,7 @@ Milestone 1
 - Help in creating grammar rules for the new language.
 
 Milestone 2
-- Work on the parsing phase of the interpreter 
+- Work on the parsing phase for conditional constructs and declarations. 
 - Focus on the semantics analysis.
 - Contribute towards documentation.
 
@@ -27,7 +27,7 @@ Milestone 1
 - Help to build an approach for the interpreter of the language.
 
 Milestone 2
-- Focus on the parsing phase.
+- Focus on the parsing phase for basic code structure and print statement.
 - Contribute towards documentation.
 - Work on the presentation file.
 
@@ -38,5 +38,6 @@ Milestone 1
 
 Milestone 2
 - Work on the tokenization phase.
+- Work on the parsing phase for loop constructs.
 - Focus on the semantics analysis.
 - Help with the presentation file. 
