@@ -1,5 +1,6 @@
 % author; purpose; version; date
 % Atharva Date; Parser for type declaration; 1.0; 04/19/2024
+% Atharva Date; Allowing float values into num type; 2.0; 04/22/2024
 
 :- use_rendering(svgtree).
 
@@ -16,6 +17,7 @@ id(identifier(X)) --> [X],
     { member(X, [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z]) }.
 
 value(number(X)) --> [X], { number(X) }.
+value(number(X)) --> [X], { float(X) }. 
 value(identifier(X)) --> id(identifier(X)).
 value(string(X)) --> [X], { string(X) }.
 value(boolean('T')) --> [T], { member(T, ['T']) }.
@@ -27,3 +29,4 @@ assign_op(assign('=')) --> [=].
 %program(P, [bool, y, =, 'T', ;], []).
 %program(P, [string, y, =, "Strong candidates", ;], []).
 %program(P, [num, y, =, 5, ;], []).
+%program(P, [num, y, =, 5.5, ;], []).
