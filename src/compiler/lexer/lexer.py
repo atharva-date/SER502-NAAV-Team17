@@ -1,3 +1,6 @@
+# author; purpose; version; date
+# Ansh Sharma; Lexer for the Tokenization of the code; 1.0; 04/17/2024
+
 import sys
 import ply.lex as lex
 
