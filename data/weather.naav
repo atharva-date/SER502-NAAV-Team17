@@ -1,0 +1,15 @@
+main {
+    bool is_raining = T;
+    bool is_cold = F;
+    bool is_weekend = T;
+
+    # Check if it's suitable weather for outdoor activities
+    bool is_suitable_weather = (not is_raining) and (not is_cold);
+
+    # Check if it's a good day for hiking
+    bool is_good_for_hiking = is_suitable_weather and is_weekend;
+
+    # Output the results
+    print("Is it suitable weather for outdoor activities? " + (is_suitable_weather ? "Yes" : "No"));
+    print("Is it a good day for hiking? " + (is_good_for_hiking ? "Yes" : "No"));
+}

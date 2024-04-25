@@ -1,0 +1,18 @@
+main {
+    num sum = 0;
+
+    # Calculate the sum of even numbers from 1 to 10
+    for num i in range(1, 11) {
+        bool is_even
+        if(i / 2 * 2 == i){
+            is_even = true;
+        }
+        else{
+            is_even = false;
+        }
+        num n = is_even ? i : 0;
+        sum = sum + n;
+    }
+
+    print("Sum of even numbers from 1 to 10: " + sum);
+}
