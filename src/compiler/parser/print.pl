@@ -1,3 +1,5 @@
+% author; purpose; version; date
+% Nisha Verma; Parser for print statement; 1.0; 04/20/2024
 :- use_rendering(svgtree).
 
 program(Parse) --> main_method(Parse).
@@ -8,14 +10,17 @@ statement_list(sl(S,R)) --> statement(S),statement_list(R).
 statement_list(sl(S))--> statement(S).
 statement(st(P)) --> print_statement(P), [";"].
 
-value(bool(B)) --> boolean_value(B).
-value(num(N)) --> numeric_value(N).
+value(number(X)) --> [X], { number(X) }.
 value(string(V)) --> string_value(V).
-value(iden(I)) --> identifier(I).
+value(identifier(X)) --> id(identifier(X)).
 
-boolean_value --> ["T"] | ["F"].
-numeric_value --> integer(I).
-numeric_value --> float(F).
+value(boolean('T')) --> [T], { member(T, ['T']) }.
+value(boolean('F')) --> [F], { member(F, ['F']) }.
+numeric_value(I) --> integer(I).
+numeric_value(F) --> float(F).
+
+id(identifier(X)) --> [X],
+    { member(X, [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z]) }.
 
 integer(int(I)) --> digit_sequence(I).
 float(float(I,D)) --> digit_sequence(I), [“.”], digit_sequence(D).
@@ -35,3 +40,8 @@ digit(9) --> "9".
 string_value(V) --> [V], { string(V) }.
 
 print_statement(print(V)) --> ["print"], ["("], value(V), [")"].
+
+% program(P, ["main", "{", "print", "(", 5, ")", ";", "print", "(", 6, ")", ";","}"],[]).
+% program(P, ["main", "{", "print", "(", 4.2, ")", ";", "print", "(", 6.0, ")", ";","}"],[]).
+% program(P, ["main", "{", "print", "(", a, ")", ";", "print", "(", 6.0, ")", ";","}"],[]).
+% program(P, ["main", "{", "print", "(", "Hello World!", ")", ";", "print", "(", b, ")", ";","}"],[]).

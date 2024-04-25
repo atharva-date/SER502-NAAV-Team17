@@ -1,3 +1,6 @@
+% author; purpose; version; date
+% Nisha Verma; Parser for assignment; 1.0; 04/20/2024
+
 :- use_rendering(svgtree).
 
 program(Parse) --> main_method(Parse).
