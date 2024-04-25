@@ -1,6 +1,7 @@
 % author; purpose; version; date
 % Nisha Verma; Parser for assignment; 1.0; 04/20/2024
 % Nisha Verma; Improvised assignment; 2.0; 04/25/2024
+% Nisha Verma; Improved parse tree for print statement; 3.0; 04/25/2024
 :- use_rendering(svgtree).
 
 program(Parse) --> main_method(Parse).
@@ -9,7 +10,7 @@ main_method(main_block(Block)) --> ["main"], block(Block).
 block(block(Statements)) -->  ["{"], statement_list(Statements), ["}"].
 statement_list(sl(S,R)) --> statement(S),statement_list(R).
 statement_list(sl(S))--> statement(S).
-statement(st(P)) --> print_statement(P), [";"].
+statement(print(V)) --> ["print"], ["("], value(V), [")"], [";"].
 statement(assignment(Identifier, Value)) --> id(Identifier), ["="], value(Value), [";"].
 
 value(number(X)) --> [X], { number(X) }.
@@ -40,7 +41,6 @@ digit(9) --> "9".
 
 string_value(V) --> [V], { string(V) }.
 
-print_statement(print(V)) --> ["print"], ["("], value(V), [")"].
-
 % program(P, ["main", "{", a, "=", "Hello", ";","}"],[]).
 % program(P, ["main", "{", a, "=", 5.2, ";","}"],[]).
+% program(P, ["main", "{", "print", "(", "Hello", ")", ";","}"],[]).
