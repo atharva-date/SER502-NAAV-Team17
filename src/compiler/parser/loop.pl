@@ -1,9 +1,7 @@
 % author; purpose; version; date
-% Ansh Sharma; Parser - Looping Grammer and Increment/Decrement Expressions; 1.0; 04/21/2024
+% Ansh Sharma; Parser - Boolean Operators and Boolean Expressions Added; 2.0; 04/25/2024
 
 :- use_rendering(svgtree).
-
-% Expressions code
 
 program(Parse) --> block(Parse).
 
@@ -42,14 +40,16 @@ command(for_loop(Decl, Condition, IncrementExpr, For_Block)) -->
 command(for_loop(Decl, Condition, DecrementExpr, For_Block)) -->
     [for], ["("], declaration(Decl), [';'], condition(Condition), [';'], decrement_expression(DecrementExpr), [")"],
     ["{"], block(For_Block), ["}"].
-
 command(range_loop(Type, Id, Value1, Value2, Range_Block)) -->
     [for], type(Type), id(Id), [in], [range], ["("], value(Value1), [':'], value(Value2), [")"],
     ["{"], block(Range_Block), ["}"].
-
 command(while_loop(Condition, While_Block)) -->
     [while], ["("], condition(Condition), [")"],
     ["{"], block(While_Block), ["}"].
+command(assign_boolean_value(Id, AssignOp, Value)) -->
+    id(Id), assign_op(AssignOp), value(Value), [;].
+command(assign_boolean_expression_value(Id, AssignOp, Expr)) -->
+    id(Id), assign_op(AssignOp), boolean_expression(Expr), [;].
 
 expression(expression(Expr)) --> arithmetic_expression(Expr).
 arithmetic_expression(arithmetic_expr(Term)) --> term(Term).
@@ -90,8 +90,8 @@ type(type(string)) --> [string].
 value(number(X)) --> [X], { number(X) }.
 value(identifier(X)) --> id(identifier(X)).
 value(string(X)) --> [X], { string(X) }.
-value(boolean('T')) --> [T], { member(T, ['T']) }.
-value(boolean('F')) --> [F], { member(F, ['F']) }.
+value(boolean('T')) --> ['T'], { member('T', ['T']) }.
+value(boolean('F')) --> ['F'], { member('F', ['F']) }.
 
 id(identifier(X)) --> [X],
     { member(X, [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z]) }.
@@ -105,8 +105,18 @@ comparison_operator(comparison_operator('<=')) --> [<=].
 comparison_operator(comparison_operator('==')) --> [==].
 comparison_operator(comparison_operator('<>')) --> [<>].
 
+% Define boolean operators
+boolean_operator('and') --> [and].
+boolean_operator('or') --> [or].
+boolean_operator('not') --> [not].
+
 condition(condition(Value1, CompOp, Value2)) -->
     value(Value1), comparison_operator(CompOp), value(Value2).
+condition(condition(BoolExpr)) --> boolean_expression(BoolExpr).
+
+boolean_expression(boolean_expression(Value)) --> value(Value).
+boolean_expression(boolean_expression(Value1, BoolOp, Value2)) -->
+    value(Value1), boolean_operator(BoolOp), value(Value2).
 
 increment_expression(increment(Id)) --> id(Id), [++].
 decrement_expression(decrement(Id)) --> id(Id), [--].
@@ -125,3 +135,5 @@ decrement_expression(decrement(Id)) --> id(Id), [--].
 %Range_Loop
 %program(P, [main, "{", num, y, =, 6, ;, for, num, x, in, range, "(", 0, :, 3, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", "}"], []).
 
+%Boolean Expression
+%program(P, [main, "{", bool, y, =, 'T', ;, y, =, 'T', or, 'F', ;, "}"], []).
