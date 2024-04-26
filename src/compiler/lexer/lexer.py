@@ -1,10 +1,9 @@
 # author; purpose; version; date
-# Ansh Sharma; Lexer for the Tokenization of the code; 1.0; 04/17/2024
+# Ansh Sharma; Lexer syntax corrected; 2.0; 04/26/2024
 
 import sys
 import ply.lex as lex
 
-# List of token names. This is always required.
 tokens = (
     'BOOLEAN',
     'NUMERIC',
@@ -27,9 +26,11 @@ tokens = (
     'L_PAREN',
     'R_PAREN',
     'SEMICOLON',
+    'TERNARY_OP',
+    'COLON',
+    'COMMA',
 )
 
-# Regular expression rules for simple tokens
 t_ARITHMETIC_OP = r'[+\-*/]'
 t_BOOL_OP = r'and|or|not'
 t_COMPARISON_OP = r'[<>]=?|==|!='
@@ -41,50 +42,49 @@ t_R_BRACE = r'}'
 t_L_PAREN = r'\('
 t_R_PAREN = r'\)'
 t_SEMICOLON = r';'
+t_TERNARY_OP = r'\?'
+t_COLON = r':'
+t_COMMA = r','
 
-# Define a rule so we can track line numbers
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-# A string containing ignored characters (spaces, tabs, and comments)
 t_ignore = " \t"
 
-# Define a rule to ignore comments starting with #
 def t_comment(t):
     r'\#.*'
     pass
 
-# Define a rule to handle errors
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
-# Define a rule for boolean literals
 def t_BOOLEAN(t):
     r'T|F'
-    t.value = f"{t.value}"
+    t.value = f'{t.value}'
     return t
 
-# Define a rule for numeric literals
 def t_NUMERIC(t):
     r'\d+(\.\d+)?'
     t.value = t.value
     return t
 
-# Define a rule for string literals
 def t_STRING(t):
-    r'"([^\\"]|\\.)*"'
+    r'"([^\\"]|\\.)+"'
     t.value = f"{t.value}"
     return t
 
-# Define a rule for identifiers
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.value = f"{t.value}"
     return t
 
-# Build the lexer
+def t_FOR(t):
+    r'for\s+(\w+)\s+in\s+range\s*\(\s*(\d+)\s*,\s*(\d+)\s*\)'
+    t.type = 'FOR'
+    return t
+
 lexer = lex.lex()
 
 if __name__ == "__main__":
@@ -95,14 +95,11 @@ if __name__ == "__main__":
     filename = sys.argv[1]
 
     try:
-        # Read the contents of the file
         with open(filename, "r") as f:
             data = f.read()
 
-        # Give the lexer the file content as input
         lexer.input(data)
 
-        # Tokenize
         token_list = []
         while True:
             tok = lexer.token()
@@ -110,7 +107,6 @@ if __name__ == "__main__":
                 break
             token_list.append(str(tok.value) if isinstance(tok.value, str) else tok.value)
 
-        # Print tokens in one line
         print(token_list)
 
     except FileNotFoundError:
