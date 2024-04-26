@@ -4,111 +4,123 @@
 import sys
 import ply.lex as lex
 
+# List of token names
 tokens = (
-    'BOOLEAN',
-    'NUMERIC',
-    'STRING',
-    'ID',
-    'ARITHMETIC_OP',
-    'BOOL_OP',
-    'COMPARISON_OP',
-    'ASSIGNMENT_OP',
-    'INCREMENT_OP',
-    'DECREMENT_OP',
-    'IF',
-    'ELSE',
-    'FOR',
-    'WHILE',
-    'PRINT',
-    'MAIN',
-    'L_BRACE',
-    'R_BRACE',
-    'L_PAREN',
-    'R_PAREN',
-    'SEMICOLON',
-    'TERNARY_OP',
-    'COLON',
-    'COMMA',
+    'BOOL', 'NUM', 'STRING', 'IDENTIFIER', 'BOOLEAN_VALUE', 'NUMERIC_VALUE',
+    'STRING_VALUE', 'ARITHMETIC_OPERATOR', 'BOOLEAN_OPERATOR', 'COMPARISON_OPERATOR',
+    'INCREMENT_OPERATOR', 'DECREMENT_OPERATOR', 'FOR', 'WHILE', 'IN', 'RANGE', 'IF',
+    'ELSE', 'TRUE', 'FALSE', 'PRINT', 'MAIN', 'SEMICOLON', 'LEFT_PAREN', 'RIGHT_PAREN',
+    'LEFT_BRACE', 'RIGHT_BRACE', 'EQUALS', 'COLON', 'QUESTION_MARK', 'COMMA'
 )
 
-t_ARITHMETIC_OP = r'[+\-*/]'
-t_BOOL_OP = r'and|or|not'
-t_COMPARISON_OP = r'[<>]=?|==|!='
-t_ASSIGNMENT_OP = r'='
-t_INCREMENT_OP = r'\+\+'
-t_DECREMENT_OP = r'--'
-t_L_BRACE = r'{'
-t_R_BRACE = r'}'
-t_L_PAREN = r'\('
-t_R_PAREN = r'\)'
+# Regular expression rules for simple tokens
 t_SEMICOLON = r';'
-t_TERNARY_OP = r'\?'
+t_LEFT_PAREN = r'\('
+t_RIGHT_PAREN = r'\)'
+t_LEFT_BRACE = r'\{'
+t_RIGHT_BRACE = r'\}'
+t_EQUALS = r'='
 t_COLON = r':'
+t_QUESTION_MARK = r'\?'
 t_COMMA = r','
+t_INCREMENT_OPERATOR = r'\+\+'
+t_DECREMENT_OPERATOR = r'--'
 
+# Define a rule for arithmetic operators
+def t_ARITHMETIC_OPERATOR(t):
+    r'[\+\-\*/]'
+    return t
+
+# Define a rule for boolean operators
+def t_BOOLEAN_OPERATOR(t):
+    r'and|or|not'
+    return t
+
+# Define a rule for comparison operators
+def t_COMPARISON_OPERATOR(t):
+    r'<|>|<=|>=|==|!='
+    return t
+
+# Define a rule for keywords and identifiers
+def t_IDENTIFIER(t):
+    r'[A-Za-z][A-Za-z0-9_]*'
+    keywords = {
+        'main': 'MAIN',
+        'bool': 'BOOL',
+        'num': 'NUM',
+        'string': 'STRING',
+        'if': 'IF',
+        'else': 'ELSE',
+        'for': 'FOR',
+        'while': 'WHILE',
+        'in': 'IN',
+        'range': 'RANGE',
+        'print': 'PRINT',
+        'T': 'TRUE',
+        'F': 'FALSE'
+    }
+    t.type = keywords.get(t.value, 'IDENTIFIER')
+    return t
+
+# Define a rule for numeric values
+def t_NUMERIC_VALUE(t):
+    r'\d+(\.\d+)?'
+    t.value = float(t.value) if '.' in t.value else int(t.value)
+    return t
+
+# Define a rule for string values
+def t_STRING_VALUE(t):
+    r'"(?:\\.|[^"])*"'
+    t.value = t.value[1:-1]  # Remove double quotes
+    return t
+
+# Define a rule to track line numbers
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-t_ignore = " \t"
+# Define a rule to ignore whitespace and tabs
+t_ignore = ' \t'
 
-def t_comment(t):
+# Define a rule to skip comments
+def t_COMMENT(t):
     r'\#.*'
     pass
 
+# Error handling rule
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    print(f"Illegal character '{t.value[0]}'")
     t.lexer.skip(1)
 
-def t_BOOLEAN(t):
-    r'T|F'
-    t.value = f'{t.value}'
-    return t
-
-def t_NUMERIC(t):
-    r'\d+(\.\d+)?'
-    t.value = t.value
-    return t
-
-def t_STRING(t):
-    r'"([^\\"]|\\.)+"'
-    t.value = f"{t.value}"
-    return t
-
-def t_ID(t):
-    r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.value = f"{t.value}"
-    return t
-
-def t_FOR(t):
-    r'for\s+(\w+)\s+in\s+range\s*\(\s*(\d+)\s*,\s*(\d+)\s*\)'
-    t.type = 'FOR'
-    return t
-
+# Build the lexer
 lexer = lex.lex()
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python lexer.py <filename>")
-        sys.exit(1)
+# Read input code from file specified as command-line argument
+if len(sys.argv) < 2:
+    print("Usage: python3 lexer.py <filename>")
+    sys.exit(1)
 
-    filename = sys.argv[1]
+filename = sys.argv[1]
 
-    try:
-        with open(filename, "r") as f:
-            data = f.read()
+try:
+    with open(filename, 'r') as file:
+        input_code = file.read()
 
-        lexer.input(data)
+        # Tokenize input code
+        lexer.input(input_code)
+        
+        # List to store tokens
+        tokens_list = []
 
-        token_list = []
-        while True:
-            tok = lexer.token()
-            if not tok:
-                break
-            token_list.append(str(tok.value) if isinstance(tok.value, str) else tok.value)
+        # Iterate over tokens and append to the list
+        for token in lexer:
+            # Append token value without quotes
+            tokens_list.append(token.value)
 
-        print(token_list)
+        # Print tokens without single quotes
+        print(tokens_list)
 
-    except FileNotFoundError:
-        print(f"File '{filename}' not found.")
-        sys.exit(1)
+except FileNotFoundError:
+    print(f"Error: File '{filename}' not found.")
+    sys.exit(1)
+
