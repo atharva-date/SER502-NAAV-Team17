@@ -20,7 +20,7 @@ program(P, [main, "{", num, y, =, 6, ;, for, "(", num, x, =, 7, ;, x, >, 5, ;, x
 program(P, [main, "{", num, y, =, 6, ;, for, "(", num, x, =, 7, ;, x, >, 5, ;, x, --, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", "}"], []).
 
 %Range_Loop
-program(P, [main, "{", num, y, =, 6, ;, for, num, x, in, range, "(", 0, :, 3, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", "}"], []).
+program(P, [main, "{", num, y, =, 6, ;, for, num, x, in, range, "(", 0, ,, 3, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", "}"], []).
 
 %If_else_condition
 program(P, [main, "{", num, y, =, 6, ;, if, "(", 6, >, 5, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", else, "{", y, =, 8, /, 2, ;, "}", "}"], []).

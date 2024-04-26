@@ -1,7 +1,7 @@
 main {
-    bool is_raining = T;
-    bool is_cold = F;
-    bool is_weekend = T;
+    bool is_raining = 'T';
+    bool is_cold = 'F';
+    bool is_weekend = 'T';
 
     # Check if it's suitable weather for outdoor activities
     bool is_suitable_weather = (not is_raining) and (not is_cold);

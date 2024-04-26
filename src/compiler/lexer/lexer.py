@@ -1,5 +1,6 @@
 # author; purpose; version; date
 # Ansh Sharma; Lexer syntax corrected; 2.0; 04/26/2024
+# Atharva Date; Improve lexer for True and False values; 3.0; 04/26/2024
 
 import sys
 import ply.lex as lex
@@ -70,8 +71,8 @@ def t_NUMERIC_VALUE(t):
 
 # Define a rule for string values
 def t_STRING_VALUE(t):
-    r'"(?:\\.|[^"])*"'
-    t.value = t.value[1:-1]  # Remove double quotes
+    r"'[^']*'|\"[^\"]*\""
+    t.value = t.value[1:-1]  # Remove single quotes or double quotes
     return t
 
 # Define a rule to track line numbers
@@ -123,4 +124,3 @@ try:
 except FileNotFoundError:
     print(f"Error: File '{filename}' not found.")
     sys.exit(1)
-
