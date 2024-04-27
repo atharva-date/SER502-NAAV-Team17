@@ -1,10 +1,12 @@
 # Author, purpose, version, date
 # Atharva Date, Executor file to integrate all 3 modules, 1.0, 04/26/2024 
 # Vidya Rupak, Executor file minor fixes in lexer part, 2.0, 04/26/2024 
+# Atharva Date, Introducing pyswip for prolog file execution in python, 3.0, 04/27/2024 
 
 import subprocess
 import sys
 import os
+from pyswip import Prolog
 
 # Step 1: Read the input file
 def read_input(filename):
@@ -17,19 +19,21 @@ def read_input(filename):
 
 # Step 2: Tokenize the input using lexer.py
 def tokenize_input(input_data):
-    process = subprocess.Popen(["python", "lexer.py", filename], stdout=subprocess.PIPE, text=True, cwd=os.path.join(os.getcwd(), "lexer"))
+    process = subprocess.Popen(["python", "lexer.py", filename], stdout=subprocess.PIPE, text=True, cwd=os.getcwd())
     output, _ = process.communicate()
     token_list = output
     return token_list
 
 # Step 3: Pass tokenized output to Prolog parsing.pl
 def parse_with_prolog(token_list):
-    print(token_list)
-    prolog_query = "program(P," + token_list + ",[])."
-    print(prolog_query)
-    process = subprocess.Popen(["swipl", "-q", "-f", "parsing.pl", "-g", prolog_query, "-t", "halt"], stdout=subprocess.PIPE, text=True, cwd=os.path.join(os.getcwd(), "parser"))
-    output, _ = process.communicate()
-    return output.strip()
+    prolog = Prolog()
+    prolog.consult("parsing.pl")
+    prolog_query = "program(P, {}, []).".format(token_list)
+    solutions = prolog.query(prolog_query)
+    # Extract and return the result
+    for soln in solutions:
+        return soln["P"]
+    return None  # Or handle if there's no solution
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -43,6 +47,8 @@ if __name__ == "__main__":
 
     # Step 2: Tokenize input
     token_list = tokenize_input(input_data)
+
+    print(token_list)
 
     # Step 3: Pass tokenized output to Prolog
     prolog_output = parse_with_prolog(token_list)

@@ -1,1 +1,0 @@
-[main, "{", bool, y, =, 'T', ;, string, z, =, "Lets go", ;, "}"]
