@@ -1,6 +1,7 @@
 # author; purpose; version; date
 # Ansh Sharma; Lexer syntax corrected; 2.0; 04/26/2024
 # Atharva Date; Improve lexer for True and False values; 3.0; 04/26/2024
+# Vidya Rupak; Updated to include quotes around string values, brackets and boolean values; 4.0 ; 04/26/2024
 
 import sys
 import ply.lex as lex
@@ -69,10 +70,16 @@ def t_NUMERIC_VALUE(t):
     t.value = float(t.value) if '.' in t.value else int(t.value)
     return t
 
+# Define a rule for boolean values
+def t_BOOLEAN_VALUE(t):
+    r"'[TF]'"
+    t.type = 'BOOLEAN_VALUE'
+    return t
+
 # Define a rule for string values
 def t_STRING_VALUE(t):
-    r"'[^']*'|\"[^\"]*\""
-    t.value = t.value[1:-1]  # Remove single quotes or double quotes
+    r'(\'[^\']*\'|\"[^\"]*\")'
+    t.value = t.value[1:-1]  # Remove outer quotes
     return t
 
 # Define a rule to track line numbers
@@ -115,11 +122,16 @@ try:
 
         # Iterate over tokens and append to the list
         for token in lexer:
-            # Append token value without quotes
-            tokens_list.append(token.value)
+            # Surround with double quotes if not an identifier, keyword, or number
+            if token.type in ['LEFT_PAREN', 'RIGHT_PAREN', 'LEFT_BRACE', 'RIGHT_BRACE', 'STRING_VALUE']:
+                tokens_list.append('"' + token.value + '"')
+            else:
+                tokens_list.append(token.value)
 
         # Print tokens without single quotes
         print(tokens_list)
+        if "'T'" in tokens_list:
+            print("T exists in the list")
 
 except FileNotFoundError:
     print(f"Error: File '{filename}' not found.")
