@@ -129,9 +129,10 @@ try:
                 tokens_list.append(token.value)
 
         # Print tokens without single quotes
-        print(tokens_list)
-        if "'T'" in tokens_list:
-            print("T exists in the list")
+        tokens_string = "[" + ", ".join(tokens_list) + "]"
+        print(tokens_string)
+        # if "'T'" in tokens_list:
+        #     print("T exists in the list")
 
 except FileNotFoundError:
     print(f"Error: File '{filename}' not found.")

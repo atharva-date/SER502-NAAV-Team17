@@ -1,20 +1,24 @@
 main {
-    num num1 = 20;
-    num num2 = 5;
+    num numone = 20;
+    num numtwo = 5;
 
     # Addition
-    num sum = num1 + num2;
-    print("Sum: " + sum);
+    num sum;
+    sum = numone + numtwo;
+    print(sum);
 
     # Subtraction
-    num difference = num1 - num2;
-    print("Difference: " + difference);
+    num difference;
+    difference = numone - numtwo;
+    print(difference);
 
     # Multiplication
-    num product = num1 * num2;
-    print("Product: " + product);
+    num product;
+    product = numone * numtwo;
+    print(product);
 
     # Division
-    num quotient = (num2 != 0) ? (num1 / num2) : 0;
-    print("Quotient: " + quotient);
+    num quotient;
+    quotient = numone / numtwo;
+    print(quotient);
 }

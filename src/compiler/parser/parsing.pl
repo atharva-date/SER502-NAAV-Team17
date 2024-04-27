@@ -1,7 +1,7 @@
 % author; purpose; version; date
 % Atharva Date, Ansh Sharma, Nisha Verma; Final Parser; 1.0; 04/25/2024
 
-:- use_rendering(svgtree).
+%:- use_rendering(svgtree).
 
 program(Parse) --> block(Parse).
 
@@ -46,7 +46,7 @@ command(for_loop(Decl, Condition, DecrementExpr, For_Block)) -->
     ["{"], block(For_Block), ["}"].
 
 command(range_loop(Type, Id, Value1, Value2, Range_Block)) -->
-    [for], type(Type), id(Id), [in], [range], ["("], value(Value1), [","], value(Value2), [")"],
+    [for], type(Type), id(Id), [in], [range], ["("], value(Value1), [':'], value(Value2), [")"],
     ["{"], block(Range_Block), ["}"].
 
 command(while_loop(Condition, While_Block)) -->
@@ -86,6 +86,7 @@ arithmetic_operator(arithmetic_operator('*')) --> ['*'].
 arithmetic_operator(arithmetic_operator('+')) --> ['+'].
 arithmetic_operator(arithmetic_operator('-')) --> ['-'].
 
+% Define operator precedence
 precedence('/', 2).
 precedence('*', 2).
 precedence('+', 1).
@@ -113,6 +114,7 @@ comparison_operator(comparison_operator('<=')) --> [<=].
 comparison_operator(comparison_operator('==')) --> [==].
 comparison_operator(comparison_operator('<>')) --> [<>].
 
+% Define boolean operators
 boolean_operator('and') --> [and].
 boolean_operator('or') --> [or].
 boolean_operator('not') --> [not].
@@ -123,8 +125,6 @@ condition(condition(BoolExpr)) --> boolean_expression(BoolExpr).
 
 
 boolean_expression(boolean_expression(Value)) --> value(Value).
-boolean_expression(boolean_expression(not, Value)) --> [not], value(Value).
-boolean_expression(boolean_expression(not, Condition)) --> [not], condition(Condition).
 boolean_expression(boolean_expression(Value1, BoolOp, Value2)) -->
     value(Value1), boolean_operator(BoolOp), value(Value2).
 boolean_expression(condition_condition(Condition1, BoolOp, Condition2)) -->
@@ -136,4 +136,18 @@ boolean_expression(condition_value(Condition1, BoolOp, Value1)) -->
 
 increment_expression(increment(Id)) --> id(Id), [++].
 decrement_expression(decrement(Id)) --> id(Id), [--].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
