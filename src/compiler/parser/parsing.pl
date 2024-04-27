@@ -1,5 +1,6 @@
 % author; purpose; version; date
 % Atharva Date, Ansh Sharma, Nisha Verma; Final Parser; 1.0; 04/25/2024
+% Atharva Date; Improving final parser for print statements; 2.0, 04/27/2024
 
 %:- use_rendering(svgtree).
 
@@ -8,21 +9,26 @@ program(Parse) --> block(Parse).
 block(block([X])) --> [X].
 block(block(Decls)) -->
     [main], ["{"], declarations(Decls), [;], ["}"].
-block(block(Decls, Comms)) -->
-    [main], ["{"], declarations(Decls), [;], commands(Comms), ["}"].
+block(block(Decls, Comms, PrintValue)) -->
+    [main], ["{"], declarations(Decls), [;], commands(Comms), 
+    printer(PrintValue), ["}"].
 block(block(Comms)) --> commands(Comms).
 
 declarations(declarations(Decl, Decls)) -->
     declaration(Decl), [;], declarations(Decls).
 declarations(declarations(Decl)) --> declaration(Decl).
 
-commands(commands(Comm, Comms)) --> command(Comm), [;], commands(Comms).
-commands(commands(Comm)) --> command(Comm).
-
 declaration(var_declaration(Type, Id, AssignOp, Value)) -->
     type(Type), id(Id), assign_op(AssignOp), value(Value).
 declaration(instant_declaration(Type, Id)) -->
     type(Type), id(Id).
+
+printer(print(Value)) --> [print], ["("], value(Value), [")"], [;].
+printer([]) --> [].
+
+commands(commands(Comm, Comms)) --> command(Comm), [;], commands(Comms).
+commands(commands(Comm)) --> command(Comm).
+commands([]) --> [].
 
 command(assign_value(Id, AssignOp, Value)) -->
     id(Id), assign_op(AssignOp), value(Value), [;].
@@ -35,7 +41,7 @@ command(if_else_condition(Condition, If_Block, Else_Block)) -->
 command(ternary_condition(Type, Id, AssignOp, Condition, Value1, Value2)) -->
     type(Type), id(Id), assign_op(AssignOp),
     ["("], condition(Condition), [")"],
-    ["?"], value(Value1), [":"], value(Value2).
+    ["?"], value(Value1), [":"], value(Value2), [;].
 command(increment_command(IncrementExpr)) --> increment_expression(IncrementExpr), [;].
 command(decrement_command(DecrementExpr)) --> decrement_expression(DecrementExpr), [;].
 command(for_loop(Decl, Condition, IncrementExpr, For_Block)) -->
@@ -52,8 +58,6 @@ command(range_loop(Type, Id, Value1, Value2, Range_Block)) -->
 command(while_loop(Condition, While_Block)) -->
     [while], ["("], condition(Condition), [")"],
     ["{"], block(While_Block), ["}"].
-command(print_statement(Value)) -->
-    [print], ["("], value(Value), [")"], [;].
 
 command(assign_boolean_value(Id, AssignOp, Value)) -->
     id(Id), assign_op(AssignOp), value(Value), [;].
@@ -136,18 +140,3 @@ boolean_expression(condition_value(Condition1, BoolOp, Value1)) -->
 
 increment_expression(increment(Id)) --> id(Id), [++].
 decrement_expression(decrement(Id)) --> id(Id), [--].
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

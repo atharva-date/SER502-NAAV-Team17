@@ -1,46 +1,38 @@
 author; purpose; version; date
 Atharva Date, Ansh Sharma, Nisha Verma; Sample Queries for Final Parser; 1.0; 04/25/2024
-
+Atharva Date; Final parser queries improvement; 2.0; 04/27/2024
+Atharva Date; Final parser queries improvement adding print statements; 3.0; 04/27/2024
 
 Sample queries for the final parser
 
-%Var_declaration
-program(P, [main, "{", bool, y, =, 'T', ;, string, z, = , "Lets go", ;, "}"], []).
-program(P, [main, "{", num, yoy, =, 6, ;, string, abd, ;, "}"], []).
-
 %While_Loop
-program(P, [main, "{", num, y, =, 6, ;, while, "(", y, >, 5, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", "}"], []).
+program(P, [main, "{", num, y, =, 6, ;, while, "(", y, >, 5, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", print, "(", y, ")", ;,"}"], []).
 
 %Increment_Decrement
-program(P, [main, "{", num, y, =, 3, ;, y, ++, ;, "}"], []).
-program(P, [main, "{", num, y, =, 3, ;, y, --, ;, "}"], []).
+program(P, [main, "{", num, y, =, 3, ;, y, ++, ;, print, "(", y ,")", ;, "}"], []).
+program(P, [main, "{", num, y, =, 5, ;, y, --, ;, print, "(", y ,")", ;, "}"], []).
 
 %For_Loops
-program(P, [main, "{", num, y, =, 6, ;, for, "(", num, x, =, 7, ;, x, >, 5, ;, x, ++, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", "}"], []).
-program(P, [main, "{", num, y, =, 6, ;, for, "(", num, x, =, 7, ;, x, >, 5, ;, x, --, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", "}"], []).
+program(P, [main, "{", num, y, =, 6, ;, for, "(", num, x, =, 7, ;, x, >, 5, ;, x, ++, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", print, "(", y ,")", ;,"}"], []).
+program(P, [main, "{", num, y, =, 6, ;, for, "(", num, x, =, 7, ;, x, >, 5, ;, x, --, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", print, "(", y ,")", ;,"}"], []).
 
 %Range_Loop
-program(P, [main, "{", num, y, =, 6, ;, for, num, x, in, range, "(", 0, ,, 3, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", "}"], []).
+program(P, [main, "{", num, y, =, 6, ;, for, num, x, in, range, "(", 0, ",", 3, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", print, "(", y ,")", ;,"}"], []).
 
-%If_else_condition
-program(P, [main, "{", num, y, =, 6, ;, if, "(", 6, >, 5, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", else, "{", y, =, 8, /, 2, ;, "}", "}"], []).
-program(P, [main, "{", num, y, =, 6, ;, if, "(", "(", 5, >, 6 , ")", and, "(", 7, >, 10, ")", ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", else, "{", y, =, 8, /, 2, ;, "}", "}"], []).
+%If_else_condition_and_Arithmetic_operators
+program(P, [main, "{", num, y, =, 6, ;, if, "(", 6, >, 5, ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", else, "{", y, =, 8, *, 2, ;, "}", print, "(", y ,")", ;, "}"], []).
+program(P, [main, "{", num, y, =, 6, ;, if, "(", "(", 5, >, 6 , ")", and, "(", 7, >, 10, ")", ")", "{", y, =, 7, +, 4, -, 3 , ;, "}", else, "{", y, =, 8, /, 2, ;, "}", print, "(", y ,")", ;, "}"], []).
 
 %Ternary_conditon
-program(P, [main, "{", num, y, ;, num, y, =, "(", 'T', or, "(", 5, >, 6 , ")", ")", "?", 7, ":", 0, "}"], []).
+program(P, [main, "{", num, y, ;, num, y, =, "(", 'T', or, "(", 5, >, 6 , ")", ")", "?", 7, ":", 0, ;, print, "(", y ,")", ;, "}"], []).
 
-%Arithmetic_Operations
-program(P, [main, "{", num, y, =, 6, ;, y, =, 8, /, 2, -, 6, +, 0, ;, "}"], []).
-program(P, [main, "{", num, y, =, 6, ;, y, =, 8, -, 6, /, 2, +, 3, ;, "}"], []).
-
-%Print_statement
-program(P, [main, "{", bool, y, =, 'T', ;, string, z, = , "Lets go", ;, print, "(", 6, ")", ;,"}"], []).
+%Var_declaration_and_Print_statement
+program(P, [main, "{", bool, y, =, 'T', ;, string, z, = , "Lets go", ;, print, "(", y, ")", ;,"}"], []).
 program(P, [main, "{", bool, y, =, 'T', ;, string, z, = , "Lets go", ;, print, "(", z, ")", ;,"}"], []).
 
 %Boolean Expression
-program(P, [main, "{", bool, y, =, 'T', ;, y, =, 'T', or, 'F', ;, "}"], []).
-program(P, [main, "{", num, y, ;, num, y, =, "(", 'T', and, "(", 5, >, 6 , ")", ")", "?", 7, ":", 0, "}"], []).
-program(P, [main, "{", num, y, ;, num, y, =, "(", "(", 5, >, 6 , ")", or, "(", 7, >, 10, ")", ")", "?", 7, ":", 0, "}"], []).
+program(P, [main, "{", bool, y, =, 'T', ;, y, =, 'T', or, 'F', ;, print, "(", y, ")", ;,"}"], []).
+program(P, [main, "{", bool, y, =, 'T', ;, y, =, 'T', and, 'F', ;, print, "(", y, ")", ;,"}"], []).
 
 %Not Expression
 program(P, [main, "{", bool, y, =, 'T', ;, y, =, not, 'T', and, "(", 7, <, 9, ")", ;, "}"], []).
