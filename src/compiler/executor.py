@@ -1,3 +1,7 @@
+# Author, purpose, version, date
+# Atharva Date, Executor file to integrate all 3 modules, 1.0, 04/26/2024 
+# Vidya Rupak, Executor file minor fixes in lexer part, 2.0, 04/26/2024 
+
 import subprocess
 import sys
 import os
@@ -24,7 +28,6 @@ def parse_with_prolog(token_list):
     prolog_query = "program(P," + token_list + ",[])."
     print(prolog_query)
     process = subprocess.Popen(["swipl", "-q", "-f", "parsing.pl", "-g", prolog_query, "-t", "halt"], stdout=subprocess.PIPE, text=True, cwd=os.path.join(os.getcwd(), "parser"))
-    print(process)
     output, _ = process.communicate()
     return output.strip()
 
