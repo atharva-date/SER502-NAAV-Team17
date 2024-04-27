@@ -46,7 +46,7 @@ command(for_loop(Decl, Condition, DecrementExpr, For_Block)) -->
     ["{"], block(For_Block), ["}"].
 
 command(range_loop(Type, Id, Value1, Value2, Range_Block)) -->
-    [for], type(Type), id(Id), [in], [range], ["("], value(Value1), [':'], value(Value2), [")"],
+    [for], type(Type), id(Id), [in], [range], ["("], value(Value1), [","], value(Value2), [")"],
     ["{"], block(Range_Block), ["}"].
 
 command(while_loop(Condition, While_Block)) -->
