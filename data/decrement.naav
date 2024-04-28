@@ -1,5 +1,5 @@
 main{
-    num y=3;
+    num y=4;
     y--;
     print(y);
 }
