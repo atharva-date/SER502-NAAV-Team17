@@ -7,9 +7,10 @@ Milestone 1
 - Help in creating grammar rules for the new language.
 
 Milestone 2
-- Work on the parsing phase for conditional constructs and declarations. 
-- Focus on the semantics analysis.
-- Contribute towards documentation.
+- Parsing phase for conditional constructs and declarations. 
+- Integration of all three modules: Tokenizer, Parser, and Evaluator.
+- Presentation part of the documentation.
+- Update contribution file.
 
 Vidya Rupak (vrupak@asu.edu):
 Milestone 1
@@ -17,8 +18,8 @@ Milestone 1
 - Assist in the 'grammar' part of the language.
 
 Milestone 2
+- Tokenizer 
 - Come up with data (code snippets for the language).
-- Work on the execution phase of the interpreter.
 - Direct the YouTube video for the final submission.
 
 Nisha Verma (nverma20@asu.edu):
@@ -28,8 +29,7 @@ Milestone 1
 
 Milestone 2
 - Focus on the parsing phase for basic code structure and print statement.
-- Contribute towards documentation.
-- Work on the presentation file.
+- Work on the semantics analysis evaluation.
 
 Ansh Sharma (ashar479@asu.edu):
 Milestone 1
@@ -37,7 +37,6 @@ Milestone 1
 - Assist in the 'grammar' part of the language.
 
 Milestone 2
-- Work on the tokenization phase.
+- Tokenizer
 - Work on the parsing phase for loop constructs.
-- Focus on the semantics analysis.
-- Help with the presentation file. 
+- Work on the semantics analysis evaluation.
