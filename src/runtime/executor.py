@@ -3,6 +3,7 @@
 # Vidya Rupak, Executor file minor fixes in lexer part, 2.0, 04/26/2024 
 # Atharva Date, Introducing pyswip for prolog file execution in python, 3.0, 04/27/2024 
 # Atharva Date, Integrate evaluator module, 4.0, 04/27/2024 
+# Atharva Date, Minor fix, 5.0, 04/28/2024
 
 import subprocess
 import sys
@@ -60,5 +61,4 @@ if __name__ == "__main__":
     # Step 4: Process Prolog output with evaluator.py
     evaluator_output = execute_evaluator(prolog_output, filename)
 
-    print("Evaluator Output:")
     print(evaluator_output)
