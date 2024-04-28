@@ -48,4 +48,4 @@ Instructions to run the interpreter:
    python executor.py <file_path>
    ```
 
-For example: python executor.py C:\MS_documents\ASU_Atharva_Date\Spring_2024\SER502-NAAV-Team17\data\new_data\boolean.naav
+For example: python executor.py C:\MS_documents\ASU_Atharva_Date\Spring_2024\SER502-NAAV-Team17\data\boolean.naav
