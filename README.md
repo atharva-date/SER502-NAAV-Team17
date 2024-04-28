@@ -3,7 +3,8 @@ Code for language called "NAAV"
 
 YouTube video link : <>
 
-Windows OS was used to build the compiler and interpreter for our language "NAAV".
+Windows OS was used to build the compiler and interpreter for our language "NAAV". 
+The interpreter was also ran on the Mac OS successfully. 
 
 Tools used to program our language:
 1. SWI-Prolog version 9.2.1 for x64-win64
