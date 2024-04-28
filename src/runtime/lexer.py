@@ -26,11 +26,11 @@ t_COLON = r':'
 t_QUESTION_MARK = r'\?'
 t_COMMA = r','
 t_INCREMENT_OPERATOR = r'\+\+'
-t_DECREMENT_OPERATOR = r'--'
+t_DECREMENT_OPERATOR = r'\-\-'
 
 # Define a rule for arithmetic operators
 def t_ARITHMETIC_OPERATOR(t):
-    r'[\+\-\*/]'
+    r'[+\-\*/](?!\+|-)'
     return t
 
 # Define a rule for boolean operators
@@ -122,14 +122,15 @@ try:
 
         # Iterate over tokens and append to the list
         for token in lexer:
+            token_value = str(token.value)
             # Surround with double quotes if not an identifier, keyword, or number
-            if token.type in ['LEFT_PAREN', 'RIGHT_PAREN', 'LEFT_BRACE', 'RIGHT_BRACE', 'STRING_VALUE']:
-                tokens_list.append('"' + token.value + '"')
+            if token.type in ['LEFT_PAREN', 'RIGHT_PAREN', 'LEFT_BRACE', 'RIGHT_BRACE', 'STRING_VALUE', 'COMMA', 'QUESTION_MARK', 'COLON']:
+                tokens_list.append('"' + token_value + '"')
             else:
-                tokens_list.append(token.value)
+                tokens_list.append(token_value)
 
         # Print tokens without single quotes
-        tokens_string = "[" + ", ".join(tokens_list) + "]"
+        tokens_string = "program(P, [" + ", ".join(tokens_list) + "], [])."
         print(tokens_string)
         # if "'T'" in tokens_list:
         #     print("T exists in the list")

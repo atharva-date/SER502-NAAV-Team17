@@ -1,0 +1,6 @@
+main{
+    bool y = 'T';
+    bool x = 'F';
+    y = 'T' or 'F';
+    print(y);
+}

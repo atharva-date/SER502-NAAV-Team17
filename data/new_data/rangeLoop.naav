@@ -1,0 +1,7 @@
+main{
+    num y = 6;
+    for num x in range (0, 3){
+        y=y+3;
+    }
+    print(y);
+}

@@ -38,8 +38,8 @@ command(if_else_condition(Condition, If_Block, Else_Block)) -->
 	[if], ["("], condition(Condition), [")"],
     ["{"], block(If_Block), ["}"],
     [else], ["{"], block(Else_Block), ["}"].
-command(ternary_condition(Type, Id, AssignOp, Condition, Value1, Value2)) -->
-    type(Type), id(Id), assign_op(AssignOp),
+command(ternary_condition(Id, AssignOp, Condition, Value1, Value2)) -->
+    id(Id), assign_op(AssignOp),
     ["("], condition(Condition), [")"],
     ["?"], value(Value1), [":"], value(Value2), [;].
 command(increment_command(IncrementExpr)) --> increment_expression(IncrementExpr), [;].

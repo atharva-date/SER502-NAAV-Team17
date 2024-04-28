@@ -1,0 +1,5 @@
+main{
+    num y;
+    y = ('T' or (5>6)) ? 7 : 0;
+    print(y);
+}

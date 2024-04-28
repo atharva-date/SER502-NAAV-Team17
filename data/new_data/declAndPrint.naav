@@ -1,0 +1,5 @@
+main{
+    bool y = 'T';
+    string z = 'Hello World!';
+    print(z);
+}
