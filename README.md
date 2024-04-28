@@ -43,6 +43,7 @@ Instructions to build the interpreter:
 Instructions to run the interpreter:
 1. Follow up on the above steps and copy entire path of the '.naav' file from data folder which needs to be executed
 2. Execute the following command to get the desired output for the NAAV code
+   
    ```bash
    python executor.py <file_path>
    ```
