@@ -10,12 +10,14 @@ Milestone 2
 - Parsing phase for conditional constructs and declarations. 
 - Integration of all three modules: Tokenizer, Parser, and Evaluator.
 - Presentation part of the documentation.
+- Work on the Evaluator.
 - Update contribution file.
 
 Vidya Rupak (vrupak@asu.edu):
 Milestone 1
 - Create a design of the programming language "NAAV".
 - Assist in the 'grammar' part of the language.
+
 
 Milestone 2
 - Tokenizer 
