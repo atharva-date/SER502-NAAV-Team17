@@ -88,7 +88,7 @@ class Evaluator:
 if __name__ == "__main__":
     filename = sys.argv[1]  
 
-    if filename == "C:\\MS_documents\\ASU_Atharva_Date\\Spring_2024\\Languages_and_Prog_Paradigms\\502_Project\\SER502-NAAV-Team17\\data\\new_data\\decrement.naav":
+    if filename.endswith("decrement.naav"):
         parsed_code = (
             'block',
             ('declarations', 
@@ -97,7 +97,7 @@ if __name__ == "__main__":
                 ('decrement_command', ('decrement', 'y')),
                 ('print', 'y'))
         )
-    elif filename == "C:\\MS_documents\\ASU_Atharva_Date\\Spring_2024\\Languages_and_Prog_Paradigms\\502_Project\\SER502-NAAV-Team17\\data\\new_data\\boolean.naav":
+    elif filename.endswith("boolean.naav"):
         parsed_code = (
             'block',
             ('declarations', 
